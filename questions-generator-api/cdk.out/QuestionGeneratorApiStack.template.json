@@ -1,0 +1,495 @@
+{
+ "Resources": {
+  "GenerateQuestionsLambdaServiceRole3819223D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/GenerateQuestionsLambda/ServiceRole/Resource"
+   }
+  },
+  "GenerateQuestionsLambdaServiceRoleDefaultPolicyB3341929": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "bedrock:*",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "GenerateQuestionsLambdaServiceRoleDefaultPolicyB3341929",
+    "Roles": [
+     {
+      "Ref": "GenerateQuestionsLambdaServiceRole3819223D"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/GenerateQuestionsLambda/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "GenerateQuestionsLambda0505DA83": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-135090718369-us-east-1",
+     "S3Key": "265b4e02ba2db38f3d245ce0d17fde5f1b6627235339d6c9058ad6207bf8f628.zip"
+    },
+    "Handler": "index.handler",
+    "MemorySize": 512,
+    "Role": {
+     "Fn::GetAtt": [
+      "GenerateQuestionsLambdaServiceRole3819223D",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 120
+   },
+   "DependsOn": [
+    "GenerateQuestionsLambdaServiceRoleDefaultPolicyB3341929",
+    "GenerateQuestionsLambdaServiceRole3819223D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/GenerateQuestionsLambda/Resource",
+    "aws:asset:path": "asset.265b4e02ba2db38f3d245ce0d17fde5f1b6627235339d6c9058ad6207bf8f628",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "QuestionsApiC6D74DE2": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Name": "Generate Interview Questions API"
+   },
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/QuestionsApi/Resource"
+   }
+  },
+  "QuestionsApiCloudWatchRoleC457BD87": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+       ]
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/QuestionsApi/CloudWatchRole/Resource"
+   }
+  },
+  "QuestionsApiAccountA7705F1F": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": {
+     "Fn::GetAtt": [
+      "QuestionsApiCloudWatchRoleC457BD87",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "QuestionsApiC6D74DE2"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/QuestionsApi/Account"
+   }
+  },
+  "QuestionsApiDeployment96F301AB6b3a693f0bd393f30a625224ba7c5b07": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": {
+     "Ref": "QuestionsApiC6D74DE2"
+    }
+   },
+   "DependsOn": [
+    "QuestionsApiOPTIONS50EB547F",
+    "QuestionsApiquesgenOPTIONSB4167082",
+    "QuestionsApiquesgenPOST9DD57CD6",
+    "QuestionsApiquesgen3A5987EA"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/QuestionsApi/Deployment/Resource"
+   }
+  },
+  "QuestionsApiDeploymentStageprod0F144B61": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "QuestionsApiDeployment96F301AB6b3a693f0bd393f30a625224ba7c5b07"
+    },
+    "RestApiId": {
+     "Ref": "QuestionsApiC6D74DE2"
+    },
+    "StageName": "prod"
+   },
+   "DependsOn": [
+    "QuestionsApiAccountA7705F1F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/QuestionsApi/DeploymentStage.prod/Resource"
+   }
+  },
+  "QuestionsApiOPTIONS50EB547F": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Fn::GetAtt": [
+      "QuestionsApiC6D74DE2",
+      "RootResourceId"
+     ]
+    },
+    "RestApiId": {
+     "Ref": "QuestionsApiC6D74DE2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/QuestionsApi/Default/OPTIONS/Resource"
+   }
+  },
+  "QuestionsApiquesgen3A5987EA": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "QuestionsApiC6D74DE2",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "quesgen",
+    "RestApiId": {
+     "Ref": "QuestionsApiC6D74DE2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/QuestionsApi/Default/quesgen/Resource"
+   }
+  },
+  "QuestionsApiquesgenOPTIONSB4167082": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "QuestionsApiquesgen3A5987EA"
+    },
+    "RestApiId": {
+     "Ref": "QuestionsApiC6D74DE2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/QuestionsApi/Default/quesgen/OPTIONS/Resource"
+   }
+  },
+  "QuestionsApiquesgenPOSTApiPermissionQuestionGeneratorApiStackQuestionsApi510B7F7APOSTquesgen91E8BA01": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "GenerateQuestionsLambda0505DA83",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:135090718369:",
+       {
+        "Ref": "QuestionsApiC6D74DE2"
+       },
+       "/",
+       {
+        "Ref": "QuestionsApiDeploymentStageprod0F144B61"
+       },
+       "/POST/quesgen"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/QuestionsApi/Default/quesgen/POST/ApiPermission.QuestionGeneratorApiStackQuestionsApi510B7F7A.POST..quesgen"
+   }
+  },
+  "QuestionsApiquesgenPOSTApiPermissionTestQuestionGeneratorApiStackQuestionsApi510B7F7APOSTquesgen4D0E1271": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "GenerateQuestionsLambda0505DA83",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:135090718369:",
+       {
+        "Ref": "QuestionsApiC6D74DE2"
+       },
+       "/test-invoke-stage/POST/quesgen"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/QuestionsApi/Default/quesgen/POST/ApiPermission.Test.QuestionGeneratorApiStackQuestionsApi510B7F7A.POST..quesgen"
+   }
+  },
+  "QuestionsApiquesgenPOST9DD57CD6": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "GenerateQuestionsLambda0505DA83",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "QuestionsApiquesgen3A5987EA"
+    },
+    "RestApiId": {
+     "Ref": "QuestionsApiC6D74DE2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/QuestionsApi/Default/quesgen/POST/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WQ226DMAyGn6X3qScK0q5pp911m+gDoDS4zBwShJ0hhHj3KaFbt6v/8yG/7RwgyZ4h3emJ96Zq9x1dYbmINq3SE5dLp/trpUvrKmwY3qK8emuEnFWke1gK16E63WzUD9eRmUO40ao4LTUzCkMeRHEKR29alKNmVJs9LKeb/XUNj3HsiZmcXZUeqNaCk55hKZAlHyiOe2BujPNW1AsOnZt7tBKyf6KL6DruuEGB7PxoMG5wRvl0VSje6ad6HxJ5XR/peEYwIluHnncvg5d/3Sp8FzT89HXIIMkg2TVMtB+9FeoRik2/Af1D4jN7AQAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "QuestionGeneratorApiStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "QuestionsApiEndpoint16A25E6C": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "QuestionsApiC6D74DE2"
+      },
+      ".execute-api.us-east-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "QuestionsApiDeploymentStageprod0F144B61"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "ApiEndpoint": {
+   "Description": "API Gateway endpoint URL",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "QuestionsApiC6D74DE2"
+      },
+      ".execute-api.us-east-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "QuestionsApiDeploymentStageprod0F144B61"
+      },
+      "/"
+     ]
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

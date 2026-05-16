@@ -1,0 +1,195 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "QuestionGeneratorApiStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "QuestionGeneratorApiStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "QuestionGeneratorApiStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://135090718369/us-east-1",
+      "properties": {
+        "templateFile": "QuestionGeneratorApiStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::135090718369:role/cdk-hnb659fds-deploy-role-135090718369-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::135090718369:role/cdk-hnb659fds-cfn-exec-role-135090718369-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-135090718369-us-east-1/da68faed22e457812b8f1e0a85797e33ebdda58aa41191caf72bdcfedb4fe5f6.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "QuestionGeneratorApiStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::135090718369:role/cdk-hnb659fds-lookup-role-135090718369-us-east-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "QuestionGeneratorApiStack.assets"
+      ],
+      "metadata": {
+        "/QuestionGeneratorApiStack": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "If you are relying on AWS SDK v2 to be present in the Lambda environment already, please explicitly configure a NodeJS runtime of Node 16 or lower. [ack: @aws-cdk/aws-lambda-nodejs:sdkV2NotInRuntime]",
+            "trace": [
+              "Annotations.addMessage (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:1608)",
+              "Annotations.addWarningV2 (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:825)",
+              "new Bundling (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\node_modules\\aws-cdk-lib\\aws-lambda-nodejs\\lib\\bundling.js:1:3534)",
+              "Bundling.bundle (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\node_modules\\aws-cdk-lib\\aws-lambda-nodejs\\lib\\bundling.js:1:991)",
+              "new NodejsFunction (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\node_modules\\aws-cdk-lib\\aws-lambda-nodejs\\lib\\function.js:1:2171)",
+              "new QuestionGeneratorApiStack (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\lib\\questions-generator-api-stack.ts:13:28)",
+              "Object.<anonymous> (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\bin\\questions-generator-api.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1812:14)",
+              "Module.m._compile (C:\\Users\\methi\\AppData\\Local\\npm-cache\\_npx\\1bf7c3c15bf47d04\\node_modules\\ts-node\\src\\index.ts:1618:23)",
+              "node:internal/modules/cjs/loader:1943:10",
+              "Object.require.extensions.<computed> [as .ts] (C:\\Users\\methi\\AppData\\Local\\npm-cache\\_npx\\1bf7c3c15bf47d04\\node_modules\\ts-node\\src\\index.ts:1621:12)",
+              "Module.load (node:internal/modules/cjs/loader:1533:32)",
+              "Module._load (node:internal/modules/cjs/loader:1335:12)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+              "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+              "phase4 (C:\\Users\\methi\\AppData\\Local\\npm-cache\\_npx\\1bf7c3c15bf47d04\\node_modules\\ts-node\\src\\bin.ts:649:14)",
+              "bootstrap (C:\\Users\\methi\\AppData\\Local\\npm-cache\\_npx\\1bf7c3c15bf47d04\\node_modules\\ts-node\\src\\bin.ts:95:10)",
+              "main (C:\\Users\\methi\\AppData\\Local\\npm-cache\\_npx\\1bf7c3c15bf47d04\\node_modules\\ts-node\\src\\bin.ts:55:10)",
+              "Object.<anonymous> (C:\\Users\\methi\\AppData\\Local\\npm-cache\\_npx\\1bf7c3c15bf47d04\\node_modules\\ts-node\\src\\bin.ts:800:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1812:14)",
+              "Object.<anonymous> (node:internal/modules/cjs/loader:1943:10)",
+              "Module.load (node:internal/modules/cjs/loader:1533:32)",
+              "Module._load (node:internal/modules/cjs/loader:1335:12)",
+              "wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+              "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+              "node:internal/main/run_main_module:33:47"
+            ]
+          }
+        ],
+        "/QuestionGeneratorApiStack/GenerateQuestionsLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GenerateQuestionsLambdaServiceRole3819223D"
+          }
+        ],
+        "/QuestionGeneratorApiStack/GenerateQuestionsLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GenerateQuestionsLambdaServiceRoleDefaultPolicyB3341929"
+          }
+        ],
+        "/QuestionGeneratorApiStack/GenerateQuestionsLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GenerateQuestionsLambda0505DA83"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiC6D74DE2"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/CloudWatchRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiCloudWatchRoleC457BD87"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Account": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiAccountA7705F1F"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiDeployment96F301AB6b3a693f0bd393f30a625224ba7c5b07"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiDeploymentStageprod0F144B61"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiEndpoint16A25E6C"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiOPTIONS50EB547F"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/quesgen/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiquesgen3A5987EA"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/quesgen/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiquesgenOPTIONSB4167082"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/quesgen/POST/ApiPermission.QuestionGeneratorApiStackQuestionsApi510B7F7A.POST..quesgen": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiquesgenPOSTApiPermissionQuestionGeneratorApiStackQuestionsApi510B7F7APOSTquesgen91E8BA01"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/quesgen/POST/ApiPermission.Test.QuestionGeneratorApiStackQuestionsApi510B7F7A.POST..quesgen": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiquesgenPOSTApiPermissionTestQuestionGeneratorApiStackQuestionsApi510B7F7APOSTquesgen4D0E1271"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/quesgen/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiquesgenPOST9DD57CD6"
+          }
+        ],
+        "/QuestionGeneratorApiStack/ApiEndpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiEndpoint"
+          }
+        ],
+        "/QuestionGeneratorApiStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/QuestionGeneratorApiStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/QuestionGeneratorApiStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "QuestionGeneratorApiStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

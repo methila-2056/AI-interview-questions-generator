@@ -1,0 +1,23 @@
+{
+  "name": "questions-generator-api",
+  "version": "0.1.0",
+  "bin": {
+    "questions-generator-api": "bin/questions-generator-api.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.119",
+    "@types/node": "20.x",
+    "esbuild": "^0.21.4",
+    "typescript": "~5.4.5"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.600.0",
+    "aws-cdk-lib": "2.147.3",
+    "constructs": "^10.0.0"
+  }
+}
