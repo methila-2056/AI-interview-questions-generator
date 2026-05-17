@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::135090718369:role/cdk-hnb659fds-deploy-role-135090718369-us-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::135090718369:role/cdk-hnb659fds-cfn-exec-role-135090718369-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-135090718369-us-east-1/da68faed22e457812b8f1e0a85797e33ebdda58aa41191caf72bdcfedb4fe5f6.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-135090718369-us-east-1/88380551e50c9f95bd12423e0f00bb80ddc59c5e5497be8c5a4022a4819bbc6f.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -44,7 +44,7 @@
               "new Bundling (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\node_modules\\aws-cdk-lib\\aws-lambda-nodejs\\lib\\bundling.js:1:3534)",
               "Bundling.bundle (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\node_modules\\aws-cdk-lib\\aws-lambda-nodejs\\lib\\bundling.js:1:991)",
               "new NodejsFunction (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\node_modules\\aws-cdk-lib\\aws-lambda-nodejs\\lib\\function.js:1:2171)",
-              "new QuestionGeneratorApiStack (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\lib\\questions-generator-api-stack.ts:13:28)",
+              "new QuestionGeneratorApiStack (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\lib\\questions-generator-api-stack.ts:24:28)",
               "Object.<anonymous> (C:\\Users\\methi\\Downloads\\hirerankers-workshop\\questions-generator-api\\bin\\questions-generator-api.ts:6:1)",
               "Module._compile (node:internal/modules/cjs/loader:1812:14)",
               "Module.m._compile (C:\\Users\\methi\\AppData\\Local\\npm-cache\\_npx\\1bf7c3c15bf47d04\\node_modules\\ts-node\\src\\index.ts:1618:23)",
@@ -66,6 +66,48 @@
               "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
               "node:internal/main/run_main_module:33:47"
             ]
+          }
+        ],
+        "/QuestionGeneratorApiStack/UsersTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UsersTable9725E9C8"
+          }
+        ],
+        "/QuestionGeneratorApiStack/RegisterLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RegisterLambdaServiceRole8E677BA9"
+          }
+        ],
+        "/QuestionGeneratorApiStack/RegisterLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RegisterLambdaServiceRoleDefaultPolicy9CE91415"
+          }
+        ],
+        "/QuestionGeneratorApiStack/RegisterLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RegisterLambda5E35AF61"
+          }
+        ],
+        "/QuestionGeneratorApiStack/LoginLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LoginLambdaServiceRoleD7CD1D70"
+          }
+        ],
+        "/QuestionGeneratorApiStack/LoginLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LoginLambdaServiceRoleDefaultPolicy1D9CE697"
+          }
+        ],
+        "/QuestionGeneratorApiStack/LoginLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LoginLambda25499490"
           }
         ],
         "/QuestionGeneratorApiStack/GenerateQuestionsLambda/ServiceRole/Resource": [
@@ -107,7 +149,7 @@
         "/QuestionGeneratorApiStack/QuestionsApi/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "QuestionsApiDeployment96F301AB6b3a693f0bd393f30a625224ba7c5b07"
+            "data": "QuestionsApiDeployment96F301AB0f110211d0147d53b086063db52be657"
           }
         ],
         "/QuestionGeneratorApiStack/QuestionsApi/DeploymentStage.prod/Resource": [
@@ -126,6 +168,66 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "QuestionsApiOPTIONS50EB547F"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/register/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiregisterF621799B"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/register/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiregisterOPTIONSCAFCADA6"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/register/POST/ApiPermission.QuestionGeneratorApiStackQuestionsApi510B7F7A.POST..register": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiregisterPOSTApiPermissionQuestionGeneratorApiStackQuestionsApi510B7F7APOSTregister96E6AE13"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/register/POST/ApiPermission.Test.QuestionGeneratorApiStackQuestionsApi510B7F7A.POST..register": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiregisterPOSTApiPermissionTestQuestionGeneratorApiStackQuestionsApi510B7F7APOSTregister454A0638"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/register/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiregisterPOST0ED267F3"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/login/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApilogin25C422C8"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/login/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiloginOPTIONS686F2F1F"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/login/POST/ApiPermission.QuestionGeneratorApiStackQuestionsApi510B7F7A.POST..login": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiloginPOSTApiPermissionQuestionGeneratorApiStackQuestionsApi510B7F7APOSTlogin4EC1550A"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/login/POST/ApiPermission.Test.QuestionGeneratorApiStackQuestionsApi510B7F7A.POST..login": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiloginPOSTApiPermissionTestQuestionGeneratorApiStackQuestionsApi510B7F7APOSTlogin8E68191E"
+          }
+        ],
+        "/QuestionGeneratorApiStack/QuestionsApi/Default/login/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuestionsApiloginPOST40578D3F"
           }
         ],
         "/QuestionGeneratorApiStack/QuestionsApi/Default/quesgen/Resource": [
@@ -162,6 +264,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ApiEndpoint"
+          }
+        ],
+        "/QuestionGeneratorApiStack/UsersTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UsersTableName"
           }
         ],
         "/QuestionGeneratorApiStack/CDKMetadata/Default": [

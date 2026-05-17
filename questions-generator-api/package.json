@@ -17,7 +17,11 @@
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "^3.600.0",
+    "@aws-sdk/client-dynamodb": "^3.1048.0",
+    "@aws-sdk/lib-dynamodb": "^3.1048.0",
+    "@types/bcryptjs": "^2.4.6",
     "aws-cdk-lib": "2.147.3",
+    "bcryptjs": "^3.0.3",
     "constructs": "^10.0.0"
   }
 }
