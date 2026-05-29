@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'questions-generator-ui/**'
+  workflow_dispatch:
 
 jobs:
   build-test-deploy:
