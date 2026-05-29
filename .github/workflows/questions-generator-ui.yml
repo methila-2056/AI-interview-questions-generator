@@ -31,7 +31,7 @@ jobs:
         run: npm install
 
       - name: Run Unit Tests
-        run: npx jest --watchAll=false --passWithNoTests
+        run: node_modules/.bin/jest --watchAll=false --passWithNoTests
 
       - name: Build React App
         run: CI=false npm run build
