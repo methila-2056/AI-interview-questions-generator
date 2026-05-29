@@ -1,0 +1,61 @@
+name: Question Generator UI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'questions-generator-ui/**'
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: questions-generator-ui
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Unit Tests
+        run: npm test -- --watchAll=false --passWithNoTests
+
+      - name: Build React App
+        run: CI=false npm run build
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::135090718369:role/HRS_GITHUB_ACTIONROLE_API_PROD
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: us-east-1
+
+      - name: Deploy UI to S3
+        run: |
+          aws s3 sync build/ s3://questions-generator-ui-hosting-135090718369 \
+            --delete \
+            --cache-control "max-age=31536000,public" \
+            --exclude "index.html"
+          aws s3 cp build/index.html s3://questions-generator-ui-hosting-135090718369/index.html \
+            --cache-control "no-cache,no-store,must-revalidate"
+
+      - name: Invalidate CloudFront Cache
+        run: |
+          DIST_ID=$(aws cloudfront list-distributions \
+            --query "DistributionList.Items[?contains(Origins.Items[0].DomainName,'questions-generator-ui')].Id" \
+            --output text)
+          aws cloudfront create-invalidation \
+            --distribution-id $DIST_ID \
+            --paths "/*"
