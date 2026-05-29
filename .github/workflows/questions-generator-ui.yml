@@ -31,7 +31,9 @@ jobs:
         run: npm install
 
       - name: Run Unit Tests
-        run: node_modules/.bin/jest --watchAll=false --passWithNoTests
+        run: |
+          chmod +x node_modules/.bin/jest
+          node_modules/.bin/jest --watchAll=false --passWithNoTests
 
       - name: Build React App
         run: CI=false npm run build
