@@ -56,11 +56,4 @@ jobs:
           aws s3 cp build/index.html s3://questions-generator-ui-hosting-135090718369/index.html \
             --cache-control "no-cache,no-store,must-revalidate"
 
-      - name: Invalidate CloudFront Cache
-        run: |
-          DIST_ID=$(aws cloudfront list-distributions \
-            --query "DistributionList.Items[?contains(Origins.Items[0].DomainName,'questions-generator-ui')].Id" \
-            --output text)
-          aws cloudfront create-invalidation \
-            --distribution-id $DIST_ID \
-            --paths "/*"
+      
