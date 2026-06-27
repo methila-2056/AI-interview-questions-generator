@@ -5,13 +5,11 @@
     "questions-generator-api": "bin/questions-generator-api.js"
   },
   "scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "jest",
-  "test:watch": "jest --watch",
-  "test:coverage": "jest --coverage",
-  "eject": "react-scripts eject"
-},
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "test": "jest"
+  },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.119",
     "@types/jest": "^30.0.0",
